@@ -63,6 +63,7 @@ if __name__ == "__main__":
     else:
         checks_pass = False
         print("There are non-unique names in "+options.upload_csv)
+        print()
 
     bad_tags = set()
 
@@ -86,6 +87,7 @@ if __name__ == "__main__":
         checks_pass=False
         print("These rows do not validate: ", df[~df.tags_ok])
         print("..because they contain these tags: ", bad_tags)
+        print()
 
 
     bad_dates=[]
@@ -109,6 +111,7 @@ if __name__ == "__main__":
         checks_pass=False
         print("These rows do not validate: ", df[~df.collectionDate_ok])
         print("..because they contain these bad dates: ", bad_dates)
+        print()
 
     print()
     if checks_pass:
