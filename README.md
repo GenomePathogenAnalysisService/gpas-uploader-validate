@@ -21,7 +21,7 @@ The only pre-requisite is `pandas`. If the above does not install `pandas` for y
 
 The user must create a plaintext file containing the permitted tags for that user as shown in the GPAS portal. Login to the GPAS portal as usual. Then by clicking the three horizontal lines in the top left, navigate to the `Upload` page and choose the `Tags` tab. You should see a list like
 
-![](images/gpas-screenshot.png?raw=true)
+![GPAS portal](images/gpas-screenshot.png)
 
 
 
