@@ -1,2 +1,26 @@
 # gpas-uploader-validate
-Python script that checks the Tags and collectionDate are correct in an upload CSV file
+
+This is a simple Python script that checks the upload CSV file for 
+* the provided Tags are allowed for this user
+* the `collectionDate` is provided in the correct ISO format e.g. `2021-01-13`
+* the `names` in the upload CSV file are unique
+
+## Installation
+
+To install
+
+```
+$ git clone https://github.com:GenomePathogenAnalysisService/gpas-uploader-validate.git
+$ cd gpas-uploader-validate
+$ python setup.py install --user
+```
+
+The only pre-requisite is `pandas`. If the above does not install `pandas` for you install it via `pip install pandas --user`.
+
+## Usage
+
+The user must create a plaintext file containing the permitted tags for that user as shown in the GPAS portal.
+
+
+
+
