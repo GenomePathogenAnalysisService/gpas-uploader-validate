@@ -7,15 +7,15 @@ import pandas
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("--upload_spreadsheet", required=True, help="path to the metadata CSV file that will be passed to the GPAS upload client")
+    parser.add_argument("--upload_csv", required=True, help="path to the metadata CSV file that will be passed to the GPAS upload client")
     parser.add_argument("--tag_file", required = True, help="a plaintext file containing the allowed GPAS tags for this upload user -- the list is available on the GPAS portal under Upload | Tags")
     options = parser.parse_args()
 
-    upload_spreadsheet = pathlib.Path(options.upload_spreadsheet)
+    upload_csv = pathlib.Path(options.upload_csv)
 
-    assert upload_spreadsheet.is_file(), 'provided upload CSV does not exist!'
+    assert upload_csv.is_file(), 'provided upload CSV does not exist!'
 
-    df = pandas.read_csv(upload_spreadsheet)
+    df = pandas.read_csv(upload_csv)
 
     assert 'instrument_platform' in df.columns, 'upload CSV must contain instrument_platform'
 
@@ -52,6 +52,17 @@ if __name__ == "__main__":
             allowed_tags.add(line.rstrip())
 
     checks_pass = True
+
+    if len(df.name.unique()) == len(df.name):
+        names_unique = True
+    else:
+        names_unique = False
+
+    if names_unique:
+        print("All names given in the upload CSV are unique")
+    else:
+        checks_pass = False
+        print("There are non-unique names in "+options.upload_csv)
 
     bad_tags = set()
 
