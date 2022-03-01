@@ -7,16 +7,19 @@ with open("README.md", "r") as f:
 
 setup(
     name='gpas_uploader_validate',
-    version='1.0.0',
-    description='Python script that checks the Tags and collectionDate are correct in an upload CSV file',
+    version='2.0.0',
+    description='Run extensive validation on a GPAS upload CSV',
     author='Philip W Fowler',
-    author_email='philip.fowler@ndm.ox.ac.uk',
     url='https://github.com/GenomePathogenAnalysisService/gpas-uploader-validate',
-    scripts=['bin/gpas-uploader-validate.py'],
+    long_description = README,
     install_requires=[
-        'pandas >= 1.3.1'
+        'pandas',
+        'pandera',
+        'pycountry',
+        'pytest',
+        'pytest-cov'
         ],
-    python_requires='>=3.8',
-    license="MIT",
+    packages = ['gpas_uploader_validate'],
+    python_requires='>=3.7',
     zip_safe=False
     )

@@ -7,3 +7,5 @@ Good_quality
 Negative_control
 Poor_quality
 Positive_control
+site0
+repeat
