@@ -32,8 +32,8 @@ class BaseCheckSchema(pandera.SchemaModel):
     batch: Series[str] = pandera.Field(str_matches=r'^[A-Za-z0-9._-]+$',
                                        coerce=True)
 
-    # validate run_id is alphanumeric but can also be null
-    run_id: Series[str] = pandera.Field(str_matches=r'^[A-Za-z0-9._-]+$',
+    # validate run_number is alphanumeric but can also be null
+    run_number: Series[str] = pandera.Field(str_matches=r'^[A-Za-z0-9._-]+$',
                                         nullable=True, coerce=True)
 
     # validate (sample) name is alphanumeric and insist it is unique

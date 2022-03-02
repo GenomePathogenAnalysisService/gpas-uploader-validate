@@ -172,7 +172,7 @@ $ gpas-validate-upload.py --upload_csv examples/illumina-upload-csv-fail-many.cs
 
       sample                           error
 0   MN908947                problem in batch
-1   MN908947               problem in run_id
+1   MN908947               problem in run_number
 2   MN908947              problem in control
 3   MN908947      problem in collection_date
 4   MN908947              problem in country
