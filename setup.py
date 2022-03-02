@@ -15,9 +15,7 @@ setup(
     install_requires=[
         'pandas',
         'pandera',
-        'pycountry',
-        'pytest',
-        'pytest-cov'
+        'pycountry'
         ],
     scripts=['bin/gpas-validate-upload.py'],
     packages = ['gpas_uploader_validate'],
