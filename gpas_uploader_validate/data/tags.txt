@@ -2,10 +2,7 @@ University_of_Oxford
 HPRU
 BRC_Covid
 Batch_passed_neg_ctrl
-GPAS_OxUni
 Good_quality
-Negative_control
 Poor_quality
-Positive_control
 site0
 repeat
