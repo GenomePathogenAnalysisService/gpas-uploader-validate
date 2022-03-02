@@ -1,6 +1,7 @@
 import argparse
 import pathlib
 import datetime
+import pkg_resources
 
 import pandas
 import pandera
@@ -11,7 +12,8 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
     parser.add_argument("--upload_csv", required=True, help="path to the metadata CSV file that will be passed to the GPAS upload client")
-    parser.add_argument("--tag_file", required=False, help="a plaintext file containing the allowed GPAS tags for this upload user -- the list is available on the GPAS portal under Upload | Tags")
+    parser.add_argument("--tag_file", required=False, default=pkg_resources.resource_filename("gpas_uploader_validate", 'data/tags.txt'),help="a plaintext file containing the allowed GPAS tags for this upload user -- the list is available on the GPAS portal under Upload | Tags. If not specified, then a default set is used.")
+
     options = parser.parse_args()
 
     with open('gpas_logo.txt') as INPUT:
@@ -19,23 +21,20 @@ if __name__ == "__main__":
     print(logo)
 
     upload_csv = pathlib.Path(options.upload_csv)
-
     assert upload_csv.is_file(), 'provided upload CSV does not exist!'
 
-    checks_pass = True
-
-    df = pandas.read_csv(upload_csv)
+    df = pandas.read_csv(upload_csv, dtype=object)
     assert 'name' in df.columns, 'upload CSV must contain a column called name that contains the sample names'
-
     df.set_index('name', inplace=True,verify_integrity=False)
 
+    checks_pass = True
     try:
         gpas_uploader_validate.IlluminaFASTQCheckSchema.validate(df, lazy=True)
     except pandera.errors.SchemaErrors as err:
         checks_pass = False
         print(err)
         print(err.failure_cases)
-
+        print(type(err))
 
     # read in tags if specified
     if options.tag_file:
@@ -70,9 +69,8 @@ if __name__ == "__main__":
             print("..because they contain these tags: ", bad_tags)
             print()
 
-
     print()
     if checks_pass:
-        print("--> All preliminary checks pass and the metadata CSV can be passed to the upload Electron client")
+        print("--> All preliminary checks pass and this upload CSV can be passed to the GPAS upload client")
     else:
-        print("--> Please fix the above errors and try validating again. Do not pass this upload CSV to the Electron client.")
+        print("--> Please fix the above errors and try validating again. Do not pass this upload CSV to the GPAS upload client.")

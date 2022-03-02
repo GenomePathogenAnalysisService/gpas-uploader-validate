@@ -39,10 +39,10 @@ class BaseCheckSchema(pandera.SchemaModel):
 
     region: Series[str] = pandera.Field(nullable=True, isin=[i.name for i in list(pycountry.subdivisions)], coerce=True)
 
-    postal_code: Series[str] = pandera.Field(nullable=True, coerce=True)
+    postal_code: Series[str] = pandera.Field(str_matches=r'^[A-Za-z0-9:_-]+$', nullable=True, coerce=True)
 
     # insist that the tags is alphanumeric, including : as it is the delimiter
-    tags: Series[str] = pandera.Field(nullable=True,str_matches=r'^[A-Za-z0-9:_-]+$', coerce=True)
+    tags: Series[str] = pandera.Field(nullable=True, str_matches=r'^[A-Za-z0-9:_-]+$', coerce=True)
 
     # at present host can only be human
     host: Series[str] = pandera.Field(isin=['human'], coerce=True)

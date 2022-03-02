@@ -19,7 +19,11 @@ setup(
         'pytest',
         'pytest-cov'
         ],
+    scripts=['bin/gpas-validate-upload.py'],
     packages = ['gpas_uploader_validate'],
+    license = 'MIT',
     python_requires='>=3.7',
+    package_data={'': ['data/*']},
+    include_package_data=True,
     zip_safe=False
     )
