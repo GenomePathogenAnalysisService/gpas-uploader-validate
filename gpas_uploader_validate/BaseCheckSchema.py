@@ -3,8 +3,25 @@ import datetime
 import pandas
 
 import pandera
+import pandera.extensions as extensions
 from pandera.typing import Index, DataFrame, Series
 import pycountry
+
+@extensions.register_check_method()
+def region_is_valid(df):
+
+    def validate_region(row):
+        result = pycountry.countries.get(alpha_3=row.country)
+
+        if result is None:
+            return False
+        else:
+            region_lookup = [i.name for i in pycountry.subdivisions.get(country_code=result.alpha_2)]
+            return row.region in region_lookup
+
+    df['valid_region'] = df.apply(validate_region, axis=1)
+
+    return df['valid_region'].sum()
 
 class BaseCheckSchema(pandera.SchemaModel):
     '''
@@ -63,6 +80,7 @@ class BaseCheckSchema(pandera.SchemaModel):
         return(a.dt.floor('d') == a).all()
 
     class Config:
+        region_is_valid = ()
         name = "BaseCheckSchema"
         strict = True
         coerce = True
