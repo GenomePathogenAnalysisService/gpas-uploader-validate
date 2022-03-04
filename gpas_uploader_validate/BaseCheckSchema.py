@@ -77,7 +77,13 @@ class BaseCheckSchema(pandera.SchemaModel):
     # e.g. "2022-03-01" will pass but "2022-03-01 10:20:32" will fail
     @pandera.check("collection_date")
     def check_collection_date(cls, a):
-        return(a.dt.floor('d') == a).all()
+        return ((a.dt.floor('d') == a).all())
+
+    # custom method to check that one, and only one, instrument_platform is specified in a single upload CSV
+    @pandera.check("instrument_platform")
+    def check_unique_instrument_platform(cls, a):
+        return len(a.unique()) == 1
+
 
     class Config:
         region_is_valid = ()

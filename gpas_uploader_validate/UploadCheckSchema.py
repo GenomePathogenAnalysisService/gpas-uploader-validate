@@ -18,14 +18,14 @@ class IlluminaFASTQCheckSchema(BaseCheckSchema):
     fastq2: Series[str] = pandera.Field(unique=True, str_matches=r'^[A-Za-z0-9/._-]+$', str_endswith='_2.fastq.gz', coerce=True)
 
     # insist that the path to the fastq1 exists
-    @pandera.check('fastq1')
-    def check_file_exists(cls, a, error='fastq1 file does not exist'):
-        return all(a.map(os.path.isfile))
-
-    # insist that the path to the fastq2 exists
-    @pandera.check('fastq2')
-    def check_file_exists(cls, a, error='fastq2 file does not exist'):
-        return all(a.map(os.path.isfile))
+    # @pandera.check('fastq1')
+    # def check_file1_exists(cls, a, error='fastq1 file does not exist'):
+    #     return all(a.map(os.path.isfile))
+    #
+    # # insist that the path to the fastq2 exists
+    # @pandera.check('fastq2')
+    # def check_file2_exists(cls, a, error='fastq2 file does not exist'):
+    #     return all(a.map(os.path.isfile))
 
 
 class NanoporeFASTQCheckSchema(BaseCheckSchema):
@@ -37,9 +37,9 @@ class NanoporeFASTQCheckSchema(BaseCheckSchema):
     fastq: Series[str] = pandera.Field(unique=True, str_matches=r'^[A-Za-z0-9/._-]+$', str_endswith='.fastq.gz', coerce=True)
 
     # insist that the path to the fastq exists
-    @pandera.check('fastq')
-    def check_file_exists(cls, a, error='fastq file does not exist'):
-        return all(a.map(os.path.isfile))
+    # @pandera.check('fastq')
+    # def check_file_exists(cls, a, error='fastq file does not exist'):
+    #     return all(a.map(os.path.isfile))
 
 
 class BAMCheckSchema(BaseCheckSchema):
@@ -51,6 +51,6 @@ class BAMCheckSchema(BaseCheckSchema):
     bam: Series[str] = pandera.Field(unique=True, str_matches=r'^[A-Za-z0-9/._-]+$', str_endswith='.bam', coerce=True)
 
     # insist that the path to the bam exists
-    @pandera.check('bam')
-    def check_file_exists(cls, a, error='bam file does not exist'):
-        return all(a.map(os.path.isfile))
+    # @pandera.check('bam_path')
+    # def check_bam_file_exists(cls, a, error='bam file does not exist'):
+    #     return all(a.map(os.path.isfile))
