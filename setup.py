@@ -7,7 +7,7 @@ with open("README.md", "r") as f:
 
 setup(
     name='gpas_uploader_validate',
-    version='2.0.0',
+    version='1.0.0',
     description='Run extensive validation on a GPAS upload CSV',
     author='Philip W Fowler',
     url='https://github.com/GenomePathogenAnalysisService/gpas-uploader-validate',
